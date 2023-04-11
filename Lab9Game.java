@@ -39,7 +39,7 @@ public class Lab9Game extends Application
       bp.setCenter(grid);
 
       for (int x = 0; x <4;x ++)
-      {                             //4x4 array
+      {                             //4x4 array of balls and buttons
         for (int y = 0; y<4; y++)
         {
            table[x][y] = new GamePane(x,y);
@@ -49,20 +49,20 @@ public class Lab9Game extends Application
                table[0][2].setInvisible();
                grid.add(table[x][y],x,y); 
               }
-           else
+           else                                    //set ball and buttons of 0,2 to invisible
            {
               table[x][y].setButtonsInvisible();
               grid.add(table[x][y],x,y); 
            }
            
-           table[x][y].draw(x,y);
+           table[x][y].draw(x,y);                   //draw all circles
     
         } 
       }
       
-      buttonGenerator();     
+      buttonGenerator();                    //put in all necisarry buttons
             
-      Scene scene = new Scene(bp, 600, 600); //other scene code here
+      Scene scene = new Scene(bp, 600, 600); 
       stage.setScene(scene);
       stage.setTitle("Lab7Game");
       stage.show();  
@@ -70,7 +70,7 @@ public class Lab9Game extends Application
    
   
    
-   public void numBalls()
+   public void numBalls()           //numballs counts all the balls and changes the label acordingly
       {
          numBall=0;
          numMoves=0;
@@ -78,7 +78,7 @@ public class Lab9Game extends Application
          for (int x = 0; x <4;x ++)
          {
             for (int y = 0; y <4;y ++)
-            {
+            {                                         //go through the whole array, if the ball exists add 1 to num ball
                
                if (table[x][y].getVisBall()==true)
                {
@@ -91,30 +91,30 @@ public class Lab9Game extends Application
             }
          }
          
-         for (int x = 0; x <4;x ++)
+         for (int x = 0; x <4;x ++)                      
          {
             for (int y = 0; y <4;y ++)
             {
                
-               if (table[x][y].getVisTop()==true)
+               if (table[x][y].getVisTop()==true)  //go through the whole array, if the top button exists add 1 to numMoves
                {
                   numMoves++;
                   
                }
                
-               if (table[x][y].getVisBottom()==true)
+               if (table[x][y].getVisBottom()==true)    //go through the whole array, if the Bottom button exists add 1 to numMoves
                {
                   numMoves++;
                   
                }
                
-               if (table[x][y].getVisLeft()==true)
+               if (table[x][y].getVisLeft()==true)       //go through the whole array, if the Left button exists add 1 to numMoves
                {
                   numMoves++;
                   
                }
                
-               if (table[x][y].getVisRight()==true)
+               if (table[x][y].getVisRight()==true)     //go through the whole array, if the Right button exists add 1 to numMoves
                {
                   numMoves++;
                   
@@ -128,11 +128,11 @@ public class Lab9Game extends Application
          text.setText("Number of Balls left: " +numBall+"    Number of Moves: " +numMoves);
          if ((numMoves == 0)&&(numBall>0))
          {
-            lose();
+            lose();       // do the loose method if there are no moves to be made and num ball is greater than 0
          
          }
          
-         if ((numMoves == 0)&&(numBall==1))
+         if ((numMoves == 0)&&(numBall==1))   // do the win method if there are no moves to be made and num ball is equal to 0
          {
             win();
          
@@ -143,25 +143,25 @@ public class Lab9Game extends Application
       public void win()
       {
       
-         text.setText("YOU WIN!!!");
+         text.setText("YOU WIN!!!");   //win method changes label to win
       }
       
       public void lose()
       {
       
-         text.setText("you lose....looser");
+         text.setText("you lose....loser");  //loose method changes labes to you loose
       }
       
       
       
       
       
-   public void click(int button, int buttonX_in, int buttonY_in)
+   public void click(int button, int buttonX_in, int buttonY_in)               
       {
         int buttonX = buttonX_in;
         int buttonY = buttonY_in;
         
-         if (button == 1)
+         if (button == 1)                                                //methood to make balls visible and visible depending on which buton is pushed
          {
                for (int x = 0; x <4;x ++)
                         {                             //4x4 array
@@ -240,7 +240,7 @@ public class Lab9Game extends Application
                                     if((buttonX==x)&&(buttonY==y))
                                     {
                                                                           
-                                          System.out.println(table[x][y].getY());
+                                          //System.out.println(table[x][y].getY());
                                           //System.out.println("in right");
                                           table[x-2][y].seeBall=true;
                                           table[x-1][y].seeBall=false;
@@ -258,7 +258,7 @@ public class Lab9Game extends Application
           numBalls();
    }
    
-   public void buttonGenerator()
+   public void buttonGenerator()                            //button genertor places buttons in nessary places
       {
          for (int x = 0; x <4;x ++)
          {                             //4x4 array
@@ -343,7 +343,7 @@ public class Lab9Game extends Application
       }
 
                   
-   public class GamePane extends GridPane  
+   public class GamePane extends GridPane            // this is my game pane
    {
          private Button top = new Button();
          private Button bottom = new Button();
@@ -369,22 +369,22 @@ public class Lab9Game extends Application
             setPrefSize(3,3);
             
             
-            top.setOnAction(new ButtonListener());  
+            top.setOnAction(new ButtonListener());  //top button set on action
             top.setPrefSize(80,20);
             add(top,1,0);
             
             
-            bottom.setOnAction(new ButtonListener());  
+            bottom.setOnAction(new ButtonListener());  //bottom button set on action
             bottom.setPrefSize(80,20);
             add(bottom,1,2);
             
             
-            right.setOnAction(new ButtonListener());  
+            right.setOnAction(new ButtonListener());  //right button set on action
             right.setPrefSize(20,80);
             add(right,2,1);
             
             
-            left.setOnAction(new ButtonListener());  
+            left.setOnAction(new ButtonListener());  //left button set on action
             left.setPrefSize(20,80);
             add(left,0,1);
             
@@ -415,7 +415,7 @@ public class Lab9Game extends Application
   
           }
           
-          public boolean getVisBall()
+          public boolean getVisBall()  //getters for if the ball or button is visible
           {
             return seeBall;
           }            
@@ -435,11 +435,11 @@ public class Lab9Game extends Application
             return seeRight;
           }
           
-          public boolean getVisBottom()
+          public boolean getVisBottom() 
           {
             return seeBottom;
           }
-          public Ellipse getBall()
+          public Ellipse getBall() ///getter of the ball and the buttons
           {
             return ball;
           }            
@@ -464,12 +464,7 @@ public class Lab9Game extends Application
             return bottom;
           }
           
-          public int getLocation()
-          {
-             return location;
-          }
-          
-          public int getX()
+          public int getX() //get the position of x and y
           {
              return x;
           }
@@ -488,20 +483,20 @@ public class Lab9Game extends Application
                if(top==e.getSource())
                      {
                        
-                        click(1,getX(),getY());     
+                        click(1,getX(),getY());           //if the top button is pushed kich the ball down
                      }
                if(bottom==e.getSource())
                      {
                          click(2,getX(),getY());  
-                         //System.out.println("click down");
+                         //System.out.println("click down");     //if the bottom button is pushed kich the ball up
                      }
                if(left==e.getSource())
                      {
-                           click(3,getX(),getY());
+                           click(3,getX(),getY());               //if the left button is pushed kich the ball right
                      }
                if(right==e.getSource())
                      {
-                           click(4,getX(),getY());
+                           click(4,getX(),getY());            //if the right button is pushed kich the ball left
                      }                
                }
             }
@@ -512,7 +507,7 @@ public class Lab9Game extends Application
                int y = y_in;
                
               try
-               {                                          //for toggle you change the visibily to the surrounding buttons
+               {                                          //draw the circle if its booleam is true 
                   if (seeBall == true)
                    {
                      table[x][y].getBall().setVisible(true);
@@ -521,7 +516,7 @@ public class Lab9Game extends Application
                   
                   else if (seeBall == false)
                    {
-                     table[x][y].getBall().setVisible(false);
+                     table[x][y].getBall().setVisible(false);  //if the boolean for the circle  is false dont draw
 
                    } 
                    
